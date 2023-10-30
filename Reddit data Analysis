@@ -1,0 +1,18 @@
+
+import praw
+import datetime
+import pandas as pd 
+
+
+reddit = praw.Reddit(client_id='BGUlDa54qT4B6Vu2NNN78g',client_secret='VdqWuGdg4IXkNKqSLEy3kJEcUUgZtw', user_agent='CaseStudy1')
+
+
+posts = [] 
+
+subred = reddit.subreddit('datascience')
+for post in subred.top(limit=None,time_filter='year'):
+    posts.append([post.created, post.score, post.title,  post.id, post.url, post.num_comments])
+
+posts = pd.DataFrame(posts, columns=['creation_date',"score",'title','id','url','comments'])
+
+print(posts)
